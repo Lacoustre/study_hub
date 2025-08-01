@@ -1,7 +1,7 @@
 const admin = require('firebase-admin');
 require('dotenv').config();
 
-// Initialize Firebase Admin
+
 const serviceAccount = require('./serviceAccountKey.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
@@ -13,7 +13,7 @@ async function addCurrentUser() {
   try {
     console.log('Enter your user details:');
     
-    // You'll need to replace these with your actual details
+
     const userData = {
       uid: 'YOUR_FIREBASE_UID', // Get this from Firebase Auth console
       email: 'your-email@example.com',
@@ -47,7 +47,7 @@ async function addCurrentUser() {
   }
 }
 
-// Get current Firebase Auth users
+
 async function listUsers() {
   try {
     const listUsersResult = await admin.auth().listUsers(10);
