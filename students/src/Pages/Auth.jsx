@@ -112,18 +112,18 @@ const AuthPage = () => {
               : 'Join thousands of students connecting with verified peer tutors across computer science, mathematics, and statistics courses.'}
           </p>
           {!isSignIn && (
-            <div className="text-center text-sm space-y-2">
-              <div className="flex items-center justify-center gap-2">
+            <div className="text-left text-sm space-y-2">
+              <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
                 <span>1000+ Active Student Tutors</span>
               </div>
-              <div className="flex items-center justify-center gap-2">
+              <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
                 <span>Specialized in CSM, MATH & STAT Courses</span>
               </div>
-              <div className="flex items-center justify-center gap-2">
+              <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
-                <span>Affordable Peer-to-Peer Learning</span>
+                <span>It's free</span>
               </div>
             </div>
           )}
