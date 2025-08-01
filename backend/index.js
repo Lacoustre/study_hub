@@ -8,21 +8,22 @@ const PORT = process.env.PORT || 5000;
 
 // Initialize Firebase Admin
 let credential;
-// Temporarily disabled environment variables - using serviceAccountKey.json instead
-// if (process.env.FIREBASE_PRIVATE_KEY) {
-//   credential = admin.credential.cert({
-//     projectId: process.env.FIREBASE_PROJECT_ID,
-//     clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-//     privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
-//   });
-// } else {
-  const serviceAccount = require('./serviceAccountKey.json');
-  credential = admin.credential.cert(serviceAccount);
-// }
+if (process.env.FIREBASE_PRIVATE_KEY && process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL) {
+  credential = admin.credential.cert({
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
+  });
+  console.log('Using Firebase credentials from environment variables');
+} else {
+  console.error('Firebase initialization failed: Environment variables missing');
+  console.error('Required: FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY');
+  process.exit(1);
+}
 
 admin.initializeApp({
   credential,
-  databaseURL: `https://${process.env.FIREBASE_PROJECT_ID}-default-rtdb.firebaseio.com`
+  databaseURL: process.env.FIREBASE_DATABASE_URL || "https://doreen-707c4-default-rtdb.firebaseio.com"
 });
 
 const db = admin.firestore();
